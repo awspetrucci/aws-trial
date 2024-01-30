@@ -19,6 +19,9 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     # Configura los pasos de trabajo
     steps:
     - name: Checkout
@@ -27,6 +30,7 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
+        audience: sts.amazonaws.com
         role-to-assume: arn:aws:iam::381492276645:role/github-actions-deploy
         aws-region: us-east-1
 
